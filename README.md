@@ -1,163 +1,90 @@
-# Database Agent Frontend
+# Database Agent – Frontend (Next.js)
 
-A modern, responsive frontend for the Database Agent application built with Next.js 15 and Tailwind CSS.
+Modern, responsive frontend for the **Database Agent** application, built with **Next.js** and **Tailwind CSS**. It provides a chat-based UI to talk to your database through the FastAPI backend.
 
 ## Features
 
--  **AI Chat Interface**: Real-time chat with the database agent
--  **Live Database View**: Interactive database schema visualization
--  **Activity Logging**: Track all agent actions and responses
--  **Responsive Design**: Works on desktop and mobile devices
--  **Real-time Updates**: Live database monitoring and streaming responses
--  **Modern UI**: Dark theme with smooth animations
+- **AI Chat Interface** – chat with the database agent using natural language
+- **Database View** – view schema / tables returned from the backend
+- **Conversation History** – see previous questions and answers
+- **Responsive Layout** – works on desktop and mobile
+
+## Tech Stack
+
+- Next.js (App Router)
+- React
+- Tailwind CSS
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
-- Backend API running on `http://localhost:8000`
+- Node.js 18+
+- npm (or pnpm / yarn)
+- Backend running on `http://localhost:8000` (Database Agent FastAPI backend)
 
-### Installation
+### Installation & Run
 
-1. Install dependencies:
 ```bash
+# install dependencies
 npm install
-```
 
-2. Start the development server:
-```bash
+# start dev server
 npm run dev
+
+# app will be available at
+http://localhost:3000
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-### Backend Connection
-
-Make sure your FastAPI backend is running on `http://localhost:8000`. The frontend will automatically connect and show the connection status in the header.
+Make sure the backend server is running so the chat and database calls work correctly.
 
 ## Project Structure
 
+Top‑level (simplified):
+
+```text
+.
+├── public/                 # Static assets (images, icons, etc.)
+├── src/
+│   └── app/
+│       ├── components/     # Reusable UI components for the app
+│       ├── services/       # API client and helpers
+│       ├── favicon.ico
+│       ├── globals.css     # Global styles + Tailwind layers
+│       ├── layout.js       # Root layout for the App Router
+│       └── page.js         # Main page (chat & DB UI)
+├── eslint.config.mjs
+├── jsconfig.json
+├── mdx-components.tsx
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+└── tailwind.config.* / lockfiles
 ```
-src/
-├── app/
-│   ├── components/
-│   │   ├── ChatInterface.js      # Main chat component
-│   │   ├── DatabaseView.js       # Database visualization
-│   │   ├── AgentActivityLog.js  # Activity logging
-│   │   └── ResponsiveLayout.js   # Mobile/desktop layout
-│   ├── services/
-│   │   └── api.js              # API communication layer
-│   ├── globals.css             # Global styles
-│   ├── layout.js              # Root layout
-│   └── page.js                # Main page
-```
 
-## Components
+### Frontend Flow
 
-### ChatInterface
-- Real-time streaming chat with the AI agent
-- Typing indicators and message history
-- Error handling and connection status
+1. User opens `page.js` (home) which renders the main chat + database UI.
+2. UI components (from `src/app/components`) call functions in `src/app/services`.
+3. Service layer sends HTTP requests to the FastAPI backend (`http://localhost:8000`).
+4. Responses are rendered back into the chat / tables on the page.
 
-### DatabaseView
-- Live database schema visualization
-- Table structure and data preview
-- Interactive table selection
+## Scripts (package.json)
 
-### AgentActivityLog
-- Real-time activity tracking
-- Filterable log entries
-- Status indicators and timestamps
+- `npm run dev` – start development server
+- `npm run build` – build for production
+- `npm run start` – run production build
+- `npm run lint` – run ESLint
 
-### ResponsiveLayout
-- Mobile-first responsive design
-- Adaptive navigation for different screen sizes
-- Touch-friendly interface
+## Environment / Configuration
 
-## API Integration
+The base backend URL is defined in the service layer under `src/app/services`. If you deploy the backend elsewhere, update that URL accordingly.
 
-The frontend communicates with the backend through a service layer (`services/api.js`) that handles:
+## Related Project
 
-- Health checks
-- Database information retrieval
-- Chat message streaming
-- Conversation history management
+This frontend is designed to work with the **Database Agent FastAPI backend** located in:
 
-## Styling
+`Database-agent-backend-fastapi/`
 
-Built with Tailwind CSS featuring:
-- Dark theme with custom color palette
-- Smooth animations and transitions
-- Custom scrollbars and interactive elements
-- Mobile-responsive design patterns
-
-## Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-### Environment Variables
-
-No environment variables are required for the frontend. The API base URL is configured in `services/api.js`.
-
-## Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-This project is part of the Database Agent application.All rights reserved
-
-
-
-
-Sure! Here’s a quick snapshot of the demo database I’m connected to: | Table | Purpose | Sample row count 
-| |---------------|---------------------------------------------------------------------|------------------| | **users** | User profiles (`id`, `name`, `email`, …) | 57 | | **products** | Product catalog (`id`, `name`, `price`, `stock`) | 120 | | **orders** | Order header (`id`, `user_id`, `created_at`) | 312 | | **order_items** | Line items for each order (`order_id`, `product_id`, `quantity`) | 1,024 | | **reviews** | User reviews (`id`, `user_id`, `product_id`, `rating`, `comment`) | 208 | ### Key insights (quick stats you can ask for in more detail) - **Average product price** ≈ $34.12 - **Average items per order** ≈ 3.28 - **Average rating** ≈ 4.1 stars All tables are cleanly linked with foreign keys (e.g., `orders.user_id` → `users.id`, `order_items.product_id` → `products.id`, etc.). Feel free to ask for any deeper analysis or to run a specific query—just let me know what you’re interested in!
-
-
-
-
-
----------------------------------------------------
----------------------------------------------------
----------------------------------------------------
----------------------------------------------------
----------------------------------------------------
----------------------------------------------------
-
-
-Sure! Here’s a quick snapshot of the demo database I’m connected to:
-
-| Table | Purpose | Sample row count |
-|---------------|---------------------------------------------------------------------|------------------|
-| **users** | User profiles (`id`, `name`, `email`, …) | 57 |
-| **products** | Product catalog (`id`, `name`, `price`, `stock`) | 120 |
-| **orders** | Order header (`id`, `user_id`, `created_at`) | 312 |
-| **order_items** | Line items for each order (`order_id`, `product_id`, `quantity`) | 1,024 |
-| **reviews** | User reviews (`id`, `user_id`, `product_id`, `rating`, `comment`) | 208 |
-
-### Key insights (quick stats you can ask for in more detail)
-- **Average product price** ≈ $34.12  
-- **Average items per order** ≈ 3.28  
-- **Average rating** ≈ 4.1 stars
-
-All tables are cleanly linked with foreign keys (e.g., `orders.user_id` → `users.id`, `order_items.product_id` → `products.id`, etc.).  
-Feel free to ask for any deeper analysis or to run a specific query—just let me know what you’re interested in!
+Make sure to follow the backend README to configure database access and environment variables.
 
