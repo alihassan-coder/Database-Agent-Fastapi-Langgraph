@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import "highlight.js/styles/github-dark.css";
+
+:root {
+  --background: #111827;
+  --foreground: #f9fafb;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Markdown rendering styles */
+.markdown-content {
+  line-height: 1.6;
+}
+
+.markdown-content h1:first-child,
+.markdown-content h2:first-child,
+.markdown-content h3:first-child,
+.markdown-content h4:first-child {
+  margin-top: 0;
+}
+
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content ul:last-child,
+.markdown-content ol:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content pre {
+  background-color: #1f2937 !important;
+  border: 1px solid #374151 !important;
+}
+
+.markdown-content code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid #374151;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: #1f2937;
+  font-weight: 600;
+}
+
+.markdown-content tbody tr:nth-child(even) {
+  background-color: #111827;
+}
+
+.markdown-content tbody tr:hover {
+  background-color: #1f2937;
+}
+
+/* Ensure proper spacing in chat messages */
+.message-content .markdown-wrapper {
+  width: 100%;
+}
+
+.message-content .markdown-wrapper .markdown-content {
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix zoom-related white space issues */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Prevent horizontal overflow on zoom */
+.flex {
+  min-width: 0;
+}
+
+/* Ensure containers don't create white space */
+.flex-1 {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Fix text overflow issues */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive text sizing for zoom */
+@media (max-width: 640px) {
+  .prose {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .prose {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .prose {
+    font-size: 1.125rem;
+  }
+}
+
+/* Database response formatting */
+.markdown-content .database-result {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.markdown-content .sql-query {
+  background-color: #111827;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  padding: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+}
+
+.markdown-content .success-message {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.markdown-content .error-message {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Compact table styling */
+.markdown-content table {
+  font-size: 0.875rem;
+  margin: 8px 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 6px 8px;
+  font-size: 0.875rem;
+}
+
+/* Bullet point styling for database info */
+.markdown-content ul li {
+  margin: 4px 0;
+}
+
+.markdown-content ul li::marker {
+  color: #3b82f6;
+}
